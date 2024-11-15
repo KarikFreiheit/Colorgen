@@ -1,5 +1,5 @@
 const input = document.getElementById("colorInput");
-input.addEventListener("change", function(e){
+input.addEventListener("input", function(e){
     console.log(e.target.value);
     let hex = e.target.value;
     let rgb = convertToRGB(hex);
@@ -14,8 +14,32 @@ input.addEventListener("change", function(e){
 
 });
 
+function shuffle(){
+    let theme = "light";
+    let rgb = convertToRGB(input.value);
+    document.getElementById("selectedColor").style.backgroundColor = convertToHex(rgb);
+    let accent = generateAccent(rgb);
+    document.getElementById("accentColor").style.backgroundColor = convertToHex(accent);
+    let contrast = generateContrast(rgb);
+    document.getElementById("contrastColor").style.backgroundColor = convertToHex(contrast);
+    let neutral = theme == "light" ? generateLightNeutralColor() : generateDarkNeutralColor();
+    document.getElementById("neutralColor").style.backgroundColor = convertToHex(neutral);
+}
+
+function random(){
+    let rgb = generateRandomColor();
+    let theme = "light";
+    document.getElementById("selectedColor").style.backgroundColor = convertToHex(rgb);
+    let accent = generateAccent(rgb);
+    document.getElementById("accentColor").style.backgroundColor = convertToHex(accent);
+    let contrast = generateContrast(rgb);
+    document.getElementById("contrastColor").style.backgroundColor = convertToHex(contrast);
+    let neutral = theme == "light" ? generateLightNeutralColor() : generateDarkNeutralColor();
+    document.getElementById("neutralColor").style.backgroundColor = convertToHex(neutral);
+}
+
 var similarThreshold = .98;
-var disimilarThreshold = .25;
+var disimilarThreshold = .35;
 
 //Generates an accent color when similarity is over similarity threshold
 function generateAccent(rgb){
@@ -40,7 +64,10 @@ function generateContrast(rgb){
     console.log(sim);
     return randomColor;
 }
-
+function generateRandomColor(){
+    const value = Math.floor(Math.random() * 256);
+    return [value, value, value];
+}
 //Generates Light Neutral Color
 function generateLightNeutralColor() {
     const value = Math.floor(Math.random() * 56) + 200;
