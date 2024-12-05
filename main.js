@@ -3,6 +3,9 @@
 //add dark version
 // #0 breaks it
 
+
+// random on start
+random();
 const input = document.getElementById("colorInput");
 input.addEventListener("input", function (e) {
     console.log(e.target.value);
