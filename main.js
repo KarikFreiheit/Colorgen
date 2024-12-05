@@ -128,3 +128,11 @@ function cosineSimilarity(vectorA, vectorB) {
 
     return dot / (Math.sqrt(magnitudeA) * Math.sqrt(magnitudeB));
 }
+
+
+function copyText(e) {
+    var copyText = document.getElementById(e);
+    console.log("Copied: " + copyText.innerHTML)
+    navigator.clipboard.writeText(copyText.innerHTML);
+
+}
